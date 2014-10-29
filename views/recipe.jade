@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	include ./header.jade
+	include ./categories.jade
+
+	h1= recipes.title
+	p= recipes.ingridients
+	p= recipes.content
+	p= recipes.date
+	.form
+		button(onClick="location.href='/#{recipes._category._id}/#{recipes._id}/edit'") Edit
+		form(method="post" action="/#{recipes._category._id}/#{recipes._id}?_method=DELETE")
+			input(type="submit" value="Delete")

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	include ./header.jade
+	include ./categories.jade
+
+	.form
+		form(method="post" id="newRecipe" action="")
+			label(for="title") Title
+			input(type="text" id="title" name="title")
+			br
+			label(for="category") Category
+			select(id="category" name="category")
+				option(value="") Select category...
+				each category in categories
+					option(value="#{category._id}") #{category.title}
+			br
+			label(for="ingridients") Ingridients
+			input(type="text" id="ingridients" name="ingridients")
+			br
+			label(for="content") Your Recipe
+			input(type="text" id="content" name="content")
+			br
+			input(type="submit" id="submit" value="Create")

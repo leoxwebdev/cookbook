@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	include ./header.jade
+	include ./categories.jade
+	ul
+		each recipe in recipes
+			if recipe._category
+				li: a(href="/#{recipe._category._id}/#{recipe._id}") #{recipe.title}
