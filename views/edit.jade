@@ -5,12 +5,13 @@ block content
 	include ./categories.jade
 
 	.form
-		form(method="post" id="editRecipe" action="/#{recipes._category._id}/#{recipes._id}/edit?_method=PUT")
+		form(method="post" id="editRecipe" action="#{action}")
 			label(for="title") Title
-			input(type="text" id="title" name="title" value="#{recipes.title}")
+			input(type="text" id="title" name="title" value="#{recipes.title||''}")
 			br
 			label(for="category") Category
 			select(id="category" name="category")
+				option(value="") Select category...
 				each category in categories
 					if category._id === recipes._category._id
 						option(selected value="#{category._id}") #{category.title}
@@ -18,9 +19,12 @@ block content
 						option(value="#{category._id}") #{category.title}
 			br
 			label(for="ingridients") Ingridients
-			input(type="text" id="ingridients" name="ingridients" value="#{recipes.ingridients}")
+			input(type="text" id="ingridients" name="ingridients" value="#{recipes.ingridients||''}")
 			br
 			label(for="content") Your Recipe
-			input(type="text" id="content" name="content" value="#{recipes.content}")
+			input(type="text" id="content" name="content" value="#{recipes.content||''}")
 			br
-			input(type="submit" id="submit" value="Update")
+			input(type="submit" id="edit" value="#{submit}")
+		if action
+			form(method="post" id="deleteRecipe" action="/edit/?recipe=#{recipes._id}&_method=DELETE")
+				input(type="submit" id="delete" value="Delete")

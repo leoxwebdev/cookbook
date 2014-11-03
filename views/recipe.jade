@@ -8,7 +8,9 @@ block content
 	p= recipes.ingridients
 	p= recipes.content
 	p= recipes.date
-	.form
-		button(onClick="location.href='/#{recipes._category._id}/#{recipes._id}/edit'") Edit
-		form(method="post" action="/#{recipes._category._id}/#{recipes._id}?_method=DELETE")
-			input(type="submit" value="Delete")
+	.edit
+		button(onClick="location.href='/edit?category=#{recipes._category._id}&recipe=#{recipes._id}'") Edit
+	.versions
+		ul
+			each version in versions
+				li: a(href="/#{recipes._category._id}/#{recipes._id}?version=#{version.refVersion}") #{version.lastModified}

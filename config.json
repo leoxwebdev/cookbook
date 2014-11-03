@@ -1,0 +1,6 @@
+{
+	"PORT": 3000,
+	"DB": "ds035300.mongolab.com:35300/cookbook",
+	"USER": "nybble",
+	"PASSWORD": "vjyujyfdn"
+}

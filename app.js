@@ -1,38 +1,69 @@
+'use strict'
 // requires
-var express = require('express');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+var controllers = require('./controllers/controllers');
+var config = require('./config');
+var compression = require('compression');
+var h5bp = require('h5bp');
 
-var router = require('./routes')
-	.router;
-// variables
-var app = express();
+//==============
+// Server
+//==============
 
 // server starts
-app.disable('x-powered-by')
-	.disable('etag')
-	.listen(3000);
-app.use(express.static(__dirname + '/public'));
+if (!module.parent) {
+	var app = h5bp.createServer({
+		root: __dirname + '/public'
+	});
+	app.disable('x-powered-by')
+		.disable('etag')
+		.listen(config.PORT || 3000)
+};
+
+// server's static
+app.use(h5bp({
+	root: __dirname + '/public'
+}));
+app.use(compression());
+app.use(require('express')
+	.static(__dirname + '/public'));
+
+//==============
+// Settings
+//==============
 
 // view engine setup
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/public/favicon.ico'));
+//==============
+// Middleware
+//==============
 
-// middleware
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
-app.use(methodOverride('_method'));
+// caching categories from db
+app.use(controllers.cacheCategories);
+
+// favicon
+app.use(require('serve-favicon')(__dirname + '/public/favicon.ico'));
+
+// logger
+app.use(require('morgan')('dev'));
+
+// body-parser
+app.use(require('body-parser')
+	.urlencoded({
+		extended: true
+	}));
+
+// VERB methods override
+app.use(require('method-override')('_method'));
 
 // router
-app.use(router);
+app.use(require('./controllers/routes')
+	.router);
+
+//==============
+// Error handlers
+//==============
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,8 +71,6 @@ app.use(function(req, res, next) {
 	err.status = 404;
 	next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace
@@ -53,7 +82,7 @@ if (app.get('env') === 'development') {
 			error: err
 		});
 	});
-}
+};
 
 // production error handler
 // no stacktraces leaked to user
