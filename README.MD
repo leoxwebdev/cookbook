@@ -8,7 +8,7 @@ Setup:
 
 You have to install [NodeJS](http://nodejs.org/), [GulpJS](https://github.com/gulpjs/gulp/) and [CoffeeScript](http://coffeescript.org/) globally.
 
-Go to desirerable project folder and fork project there.
+Go to desirerable folder and fork project there.
 
 ```
 $ git clone https://github.com/Ne4to777/cookbook.git
