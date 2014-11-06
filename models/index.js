@@ -72,8 +72,7 @@ recipeSchema.statics.findRecipe = function(id, categoryID, callback) {
 				},
 				select: 'title'
 			})
-			.select('title _category')
-			.limit(7)
+			.select('title _category ingridients date')
 			.sort('-date')
 			.exec(callback);
 	}

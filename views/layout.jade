@@ -12,9 +12,9 @@ html.no-js
 		meta(http-equiv="X-UA-Compatible" content="IE=edge")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		title= title
-		link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css")
-		link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css")
-		link(rel="stylesheet" href="/css/main.css")
+		link(href='http://fonts.googleapis.com/css?family=Dancing+Script:700|Courgette|Ubuntu:500|Rosario:700italic' rel='stylesheet' type='text/css')
+		link(rel="stylesheet" href="/css/bootstrap.min.css" media="screen")
+		link(rel="stylesheet" href="/css/all.min.css" media="screen")
 		script(src="/js/vendor/modernizr-2.6.2.min.js")
 		//HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
 		//WARNING: Respond.js doesn"t work if you view the page via file://
@@ -29,8 +29,6 @@ html.no-js
 				|	to improve your experience.
 		.container
 			block content
-		script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
-		script.
-			window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\\\/script>')
-		script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js")
+		script(src="/js/vendor/jquery-1.10.2.min.js")
+		script(src="/js/vendor/bootstrap.min.js")
 		script(src="/js/main.js")

@@ -1,0 +1,79 @@
+if recipes.length
+	each recipe in recipes
+		if recipe._category
+			#recipes.gradient
+				h1: a(href="/#{recipe._category._id}/#{recipe._id}") #{recipe.title}
+				.ingridients
+					p #{recipe.ingridients}
+				.timestamp
+					.timeTitle
+						|Created:
+					.timeValue
+						p #{moment(recipe.date).format("HH:mm:ss DD.MM.YY")}
+else if !submit
+	.recipeHeaderContainer.gradient
+		.recipeHeaderTitle
+			h1= recipes.title
+		.recipeHeaderTools
+			a.glyphicon.glyphicon-edit(data-toggle="tooltip" data-placement="bottom" title="Edit Recipe" href="/edit?category=#{recipes._category._id}&recipe=#{recipes._id}")
+			if versions.length
+				span.dropdown(data-toggle="tooltip" data-placement="bottom" title="Versions" role="presentation")
+					a.glyphicon.glyphicon-list.dropdown-toggle(data-toggle="dropdown" href="#")
+						span.caret
+					ul.dropdown-menu(role="menu")
+						li.dropdown-header(role="presentation") Available Versions
+						each version in versions
+							li(role="presentation")
+								a(role="menuitem" tabindex="-1" href="/#{recipes._category._id}/#{recipes._id}?version=#{version.refVersion}") #{moment(version.lastModified).format("HH:mm:ss DD.MM.YY")}
+	.ingridients
+		p= recipes.ingridients
+	.timestamp
+		.timeTitle
+			|Created:
+			br
+			|Last modified:
+		.timeValue
+			span #{moment(recipes.date).format("HH:mm:ss DD.MM.YY")}
+			br
+			span #{moment(recipes.lastModified).format("HH:mm:ss DD.MM.YY")}
+	.content
+		p!= recipes.content
+else
+	.form
+		form(method="post" id="editRecipe" action="#{action}")
+			if action
+				h1 #{recipes.title}
+			else
+				label(for="title") Title
+				input.form-control(type="text" id="title" name="title" value="#{recipes.title||''}")
+			br
+			label(for="category") Category
+			select.form-control(id="category" name="category")
+				option(value="") Select category...
+				each category in categories
+					if category._id === recipes._category._id
+						option(selected value="#{category._id}") #{category.title}
+					else
+						option(value="#{category._id}") #{category.title}
+			br
+			label(for="ingridients") Ingridients
+			input.form-control(type="text" id="ingridients" name="ingridients" placeholder="Comma separated..." value="#{recipes.ingridients||''}")
+			br
+			label(for="content") Recipe
+			textarea.form-control(id="content" name="content" rows="20")
+				= recipes.content||''
+			br
+			input.btn.btn-default(type="submit" value="#{submit}")
+		if action
+			form#formDel(method="post" action="/edit/?recipe=#{recipes._id}&_method=DELETE")
+				input.btn.btn-default(type="button" name="btn" data-toggle="modal" data-target="#confirm-delete" id="deleteBtn" value="Delete")
+			#confirm-delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+				.modal-dialog
+					.modal-content
+						.modal-header
+							| Delete Recipe
+						.modal-body
+							| Are you sure you want to delete the following recipe and all its previous versions?
+						.modal-footer
+							button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+							a#delete.btn.btn-danger.danger(href='#') Delete

@@ -14,47 +14,42 @@ module.exports.cacheCategories = function(req, res, next) {
 		if (err) return err;
 		res.locals.categories = ctgs;
 		next();
-	});
+	})
 }
 // get recipes
 module.exports.get = function(req, res) {
 	Recipe.findRecipe(req.param('recipeID'), req.param('categoryID'), function(err, recipe) {
 		if (err) return res.redirect('/');
-		if (req.param('recipeID') && recipe) {
-			Recipe.VersionedModel
-				.findOne({
-					refId: req.param('recipeID'),
-				})
-				.exec(function(err, version) {
-					if (err) return res.redirect('/');
-					var ver = version || {};
-					if (version) {
-						var isVer = false;
-						for (var i = 0; i < ver.versions.length; i++) {
-							if (req.query.version == ver.versions[i].refVersion) {
-								recipe.title = ver.versions[i].title;
-								recipe.ingridients = ver.versions[i].ingridients;
-								recipe.content = ver.versions[i].content;
-								recipe.date = ver.versions[i].date;
-								recipe._category._id = ver.versions[i]._category;
-								recipe._id = ver.refId;
-								isVer = true
-								break;
-							}
-						};
-					};
-					res.render('recipe', {
-						title: "Cookbook",
-						recipes: recipe,
-						versions: ver.versions || {}
-					})
-				})
-		} else {
-			res.render('index', {
-				title: "Cookbook",
-				recipes: recipe
+		Recipe.VersionedModel
+			.findOne({
+				refId: req.param('recipeID'),
 			})
-		}
+			.exec(function(err, version) {
+				if (err) return res.redirect('/');
+				var ver = version || {};
+				if (version) {
+					var isVer = false;
+					for (var i = 0; i < ver.versions.length; i++) {
+						if (req.query.version == ver.versions[i].refVersion) {
+							recipe.title = ver.versions[i].title;
+							recipe.ingridients = ver.versions[i].ingridients;
+							recipe.content = ver.versions[i].content;
+							recipe.date = ver.versions[i].date;
+							recipe.lastModified = ver.versions[i].lastModified;
+							recipe._category._id = ver.versions[i]._category;
+							recipe._id = ver.refId;
+							isVer = true;
+							break;
+						}
+					};
+				};
+				res.render('index', {
+					title: "Cookbook",
+					recipes: recipe,
+					moment: require('moment'),
+					versions: ver.versions || {}
+				})
+			})
 	})
 };
 // edit/new recipe
@@ -62,15 +57,16 @@ module.exports.edit = function(req, res) {
 	if (req.path === '/edit' && req.query !== {}) {
 		Recipe.findRecipe(req.query.recipe, req.query.category, function(err, recipe) {
 			if (err || recipe.length) return res.redirect('/');
-			res.render('edit', {
+			res.render('index', {
 				title: "Cookbook",
 				recipes: recipe,
 				action: '/edit?category=' + req.query.category + '&' + 'recipe=' + req.query.recipe + '&_method=PUT',
-				submit: 'Update recipe'
+				submit: 'Update recipe',
+				versions: {}
 			})
 		})
 	} else {
-		res.render('edit', {
+		res.render('index', {
 			title: "Cookbook",
 			recipes: {
 				_category: {
@@ -78,7 +74,8 @@ module.exports.edit = function(req, res) {
 				}
 			},
 			action: '',
-			submit: 'Add recipe'
+			submit: 'Add recipe',
+			versions: {}
 		})
 	}
 };
@@ -111,10 +108,9 @@ module.exports.post = function(req, res) {
 module.exports.put = function(req, res) {
 	// updating recipe if exists and redirect to this recipe
 	var b = req.body;
-	if (b.title && b.category && b.ingridients && b.content) {
+	if (b.category && b.ingridients && b.content) {
 		Recipe.findById(req.query.recipe, function(err, recipeObj) {
 			if (err) return err;
-			recipeObj.title = b.title;
 			recipeObj._category = b.category;
 			recipeObj.ingridients = b.ingridients.split(',');
 			recipeObj.content = b.content,
