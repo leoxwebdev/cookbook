@@ -13,7 +13,7 @@ Go to desirerable folder and fork project there.
 ```
 $ git clone https://github.com/Ne4to777/cookbook.git
 $ cd cookbook && npm install
-$ gulp
+$ gulp --require coffee-script/register
 ```
 Server starts at localhost:3000.
 
