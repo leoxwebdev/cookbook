@@ -1,10 +1,12 @@
 # Cookbook
 
-  Simple cookbook using MVC pattern with NodeJS, ExpressJS and MongoDB
+Simple cookbook using MVC pattern with NodeJS, ExpressJS and MongoDB
 
 ## Installing
 
 Setup:
+
+You have to install [NodeJS](http://nodejs.org/), [GulpJS](https://github.com/gulpjs/gulp/) and [CoffeeScript](http://coffeescript.org/) globally.
 
 Go to desirerable project folder and fork project there.
 
