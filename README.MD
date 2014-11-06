@@ -1,6 +1,7 @@
 # Cookbook
 
-Simple cookbook using MVC pattern with NodeJS, ExpressJS and MongoDB
+Simple cookbook using MVC pattern with NodeJS, ExpressJS and MongoDB.
+Remote address: [Cookbook](http://cookbook.jit.su/)
 
 ## Installing
 
