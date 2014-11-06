@@ -16,7 +16,9 @@ if (!module.parent) {
 	});
 	app.disable('x-powered-by')
 		.disable('etag')
-		.listen(config.PORT || 3000)
+		.listen(config.PORT || 3000, function() {
+			console.log("Listening at port " + config.PORT)
+		})
 };
 
 // server's static

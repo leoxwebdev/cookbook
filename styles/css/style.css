@@ -6,6 +6,8 @@ body {
 textarea,
 input,
 select,
+button,
+#delete,
 .modal-body,
 .modal-header {
   font-family: 'Ubuntu:500', sans-serif;
