@@ -5,6 +5,9 @@ html,
 body
 	font-family 'Courgette'
 	background-color #f5f5f5
+
+textarea, input, select, .modal-body, .modal-header
+	font-family 'Ubuntu:500', sans-serif
 	
 ul
 	padding 0
@@ -12,12 +15,15 @@ ul
 		
 h1, h5
 	text-align center
+	
 a:hover,
 a:focus
 	text-decoration none
+
 label
 	margin-bottom 1em
 	color #777
+	
 // Header	
 #head
 	margin 0 auto
@@ -96,15 +102,12 @@ label
 #categories
 	li
 		padding 5px
-		border-left 1px double #5B4F4F
+		border-left 1px double #AD9E9E
 		transition: border-left .4s
-	.active
-		background-color #FFF 
 	li:hover
-		border-left 4px double #5B4F4F
+		border-left 4px double #AD9E9E
 		transition: border-left .4s
 	a
-		font-family 'Courgette'
 		color #3C3131
 
 #new
@@ -124,9 +127,6 @@ label
 	position absolute
 	right 0
 
-.modal-body, .modal-header
-	font-family 'Ubuntu:500', sans-serif
-	
 .gradient
 	border-top 1px solid #fff
 	background linear-gradient(to bottom, #f2f2f2 0%,rgba(255,255,255,0) 30%,rgba(255,255,255,0) 100%)
