@@ -2,7 +2,7 @@
 
 Simple cookbook using MVC pattern with NodeJS, ExpressJS and MongoDB.
 
-Remote address: [Cookbook](http://cookbook.jit.su/)
+Remote address: [cookbook.jit.su](http://cookbook.jit.su/)
 
 ## Installing
 
@@ -15,6 +15,13 @@ Go to desirerable folder and fork project there.
 ```
 $ git clone https://github.com/Ne4to777/cookbook.git
 $ cd cookbook && npm install
+```
+For production:
+```
+$ node app
+```
+...or for development:
+```
 $ gulp --require coffee-script/register
 ```
 Server starts at localhost:3000.
@@ -27,3 +34,4 @@ Available features:
  + MVC implemented
  + Non-blocking usage with NodeJS
  + Sorting by categories
+ + Responsive design
