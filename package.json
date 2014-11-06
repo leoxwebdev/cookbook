@@ -1,47 +1,48 @@
 {
-  "name": "cookbook",
-  "version": "0.0.0-3",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Ne4to777/cookbook.git"
-  },
-  "author": "Alexeyev Alexey",
-  "license": "ISC",
-  "main": "app.js",
-  "scripts": {
-    "start": "app"
-  },
-  "bugs": {
-    "url": "https://github.com/Ne4to777/cookbook/issues"
-  },
-  "homepage": "https://github.com/Ne4to777/cookbook",
-  "dependencies": {
-    "body-parser": "~1.8.1",
-    "compression": "^1.2.0",
-    "express": "~4.9.0",
-    "h5bp": "^0.1.2",
-    "jade": "~1.6.0",
-    "method-override": "^2.3.0",
-    "moment": "^2.8.3",
-    "mongoose": "^3.8.17",
-    "mongoose-version": "^0.2.4",
-    "morgan": "~1.3.0",
-    "serve-favicon": "~2.1.3"
-  },
-  "devDependencies": {
-    "debug": "~2.0.0",
-    "gulp": "^3.8.8",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.4.1",
-    "gulp-minify-css": "^0.3.11",
-    "gulp-rename": "^1.2.0",
-    "gulp-stylus": "^1.3.3",
-    "gulp-supervisor": "^0.1.2",
-    "nib": "^1.0.4"
-  },
-  "subdomain": "cookbook",
-  "engines": {
-    "node": "0.10.x"
-  }
+	"name": "cookbook",
+	"version": "0.0.0-3",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ne4to777/cookbook.git"
+	},
+	"author": "Alexeyev Alexey",
+	"license": "ISC",
+	"main": "app.js",
+	"scripts": {
+		"start": "app"
+	},
+	"bugs": {
+		"url": "https://github.com/Ne4to777/cookbook/issues"
+	},
+	"homepage": "https://github.com/Ne4to777/cookbook",
+	"dependencies": {
+		"body-parser": "~1.8.1",
+		"compression": "^1.2.0",
+		"express": "~4.9.0",
+		"h5bp": "^0.1.2",
+		"jade": "~1.6.0",
+		"method-override": "^2.3.0",
+		"moment": "^2.8.3",
+		"mongoose": "^3.8.17",
+		"mongoose-version": "^0.2.4",
+		"morgan": "~1.3.0",
+		"serve-favicon": "~2.1.3"
+	},
+	"devDependencies": {
+		"coffee-script": "^1.8.0",
+		"debug": "~2.0.0",
+		"gulp": "^3.8.8",
+		"gulp-clean": "^0.3.1",
+		"gulp-concat": "^2.4.1",
+		"gulp-minify-css": "^0.3.11",
+		"gulp-rename": "^1.2.0",
+		"gulp-stylus": "^1.3.3",
+		"gulp-supervisor": "^0.1.2",
+		"nib": "^1.0.4"
+	},
+	"subdomain": "cookbook",
+	"engines": {
+		"node": "0.10.x"
+	}
 }
